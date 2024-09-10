@@ -4,7 +4,7 @@ public class traverse {
         Scanner sc=new Scanner(System.in);
         System.out.println("enter the size of an array:");
         int n=sc.nextInt();
-        stack s=new stack();
+        traverse s=new traverse();
         int arr[]=new int[n];
         for(int i=0;i<n;i++){
             arr[i]=sc.nextInt();
@@ -19,7 +19,7 @@ public class traverse {
                     s.insertion(arr);
                     break;
                 case 2:
-                    s.dilition(arr);
+                    s.delition(arr);
                     break;
                 case 3:
                     s.traversal(arr);
@@ -31,8 +31,9 @@ public class traverse {
                     s.sorting_dsc(arr);
                     break;
                 default:
-                    System.out.println("invalid choice");
-                    break;
+                        if(choice!=6)
+                        System.out.println("invalied choice");
+    
                     
             }
         }while(choice!=6);
@@ -43,27 +44,36 @@ public class traverse {
     public void insertion(int[] arr){
      System.out.println("enter the position of element where you want to insert the array");
         int p=sc.nextInt();
+        if(p<arr.length){
         System.out.println("enter the element");
         arr[p]=sc.nextInt();
-        for(int i=0;i<arr.length-1;i++){
-            System.out.println(arr[i]);
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+"\t");
             
         }
+    }
+    else{
+        System.out.println("invalid position");
+    }
         
     }
     public void delition(int[] arr){
         System.out.println("enter the position of element where you want to delete the element");
         int p=sc.nextInt();
-        for(int i=p;i<arr.length-1;i++){
+        if(p<arr.length){
+            
+        for(int i=p;i<arr.length;i++){
+            if(i+1<arr.length)
           arr[i]=arr[i+1];
         }
-        for(int i=0;i<arr.length-2;i++){
+        for(int i=0;i<arr.length-1;i++){
             System.out.println(arr[i]);
-            
         }
-
-        
-    }
+        }
+            else{
+                    System.out.println("invlied position");
+                }    
+        }   
     public void traversal(int[] arr){
 
             System.out.println("enter the element to find position ");
@@ -81,6 +91,35 @@ public class traverse {
             }
     
     }
-   
-    
+    public void sorting_asc(int[] arr){
+        int item;
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+            if(arr[i]>arr[j]){
+                item=arr[i];
+                arr[i]=arr[j];
+                arr[j]=item;            }
+        }
+    }
+    System.out.println("array after sorting..");
+    for(int i=0;i<arr.length;i++){
+        System.out.print(arr[i]+"\t");
+    }
+    }
+    public void sorting_dsc(int[] arr){
+        int item;
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+            if(arr[i]<arr[j]){
+                item=arr[i];
+                arr[i]=arr[j];
+                arr[j]=item;            
+            }
+        }
+    }
+    System.out.println("array after sorting..");
+    for(int i=0;i<arr.length;i++){
+        System.out.print(arr[i]+"\t");
+    }
+}
 }
