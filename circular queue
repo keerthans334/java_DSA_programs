@@ -1,9 +1,9 @@
 import java.util.Scanner;
-public class queues {
+public class cqueues {
 
     int f,n,r;
     int[] queue;
-    public  queues(int m){
+    public  cqueues(int m){
         f=r=-1;
         n=m;
         queue=new int[n];
@@ -20,7 +20,7 @@ public class queues {
         }
     }
     public boolean isfull(){
-        if (r==n-1 ){
+        if ((r+1)%n==f){
             System.out.println("queue is full");
             return  true;
 
@@ -35,14 +35,14 @@ public class queues {
             System.out.println("queue is full");
         }
         else{
-            if(f==-1){                           
-                f=0;
-            }
-            r=((r+1)%(n-1));
+            r=(r+1)%n;
             System.out.println("enter the element");
             Scanner sc=new Scanner(System.in);
             int  a=sc.nextInt();
             queue[r]=a;
+            if(f==-1){                           
+                f=0;
+            }
 
         }
     }
@@ -56,20 +56,25 @@ public class queues {
             f=r=-1;
             System.out.println("queue is empty");
         }
-            f=(f+1)%n-1;
+            f=(f+1)%n;
         
 
     }
 }
     public void display(){
-        for(int i=f;i<n;i++){
-            System.out.println(queue[i]);
-        }
-        for(int i=f;i<=r;i++){
-            System.out.println(queue[i]);
+        if(isempty()){
+            System.out.println(" queue is empty");
 
-    }
-}
+        }
+        else{
+            System.out.println("the queue elements are:");
+            for( int i=f;i!=r;i=(i+1)%n){
+                System.out.println(queue[i]);
+            }
+            System.out.println(queue[r]);
+            }
+        }
+
     public void fpeek(){
         if(isempty()){
     }
@@ -87,8 +92,8 @@ public class queues {
     Scanner  sc=new Scanner(System.in);
     System.out.println("enter the size of the queue.");
     int n=sc.nextInt();
-    queues q= new queues(n);
-    int ch=0;
+    cqueues q= new cqueues(n);
+   int ch=0;
         do{
             System.out.println("enter your choice");
             System.out.println("1.enqueue 2.dequeue 3.fpeek 4.rpeek 5.display 6.exit");
@@ -108,6 +113,7 @@ public class queues {
                 break;
                 case 5:
                 q.display();
+                break;
                 case 6:
                 System.exit(1);
             
